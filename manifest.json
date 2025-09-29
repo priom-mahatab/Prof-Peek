@@ -1,0 +1,25 @@
+{
+    "manifest_version": 3,
+    "name": "Professor Peek",
+    "version": "1.0.0",
+    "description": "Shows RateMyProfessors rating & difficulty for St. Edward’s instructors.",
+    "permissions": ["scripting", "storage"],
+    "host_permissions": [
+    "https://www.ratemyprofessors.com/*",
+    "https://*.ratemyprofessors.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+        "matches": ["https://banner.stedwards.edu/StudentRegistrationSsb/ssb/classSearch/classSearch*"],
+        "js": ["content.js"],
+        "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "48": "icons/icon48.png"
+  }
+
+}
