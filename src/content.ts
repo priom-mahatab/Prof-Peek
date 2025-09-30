@@ -23,9 +23,9 @@ interface RatingData {
 }
 
 // function for injecting rating add a class and then add text and styling
-function injectRating(link: HTMLAnchorElement, ratingData: RatingData): void {
+function injectRating(link: HTMLAnchorElement, rating: string, difficulty: string): void {
     const badge = document.createElement("span");
-    badge.textContent = `Rating: ${ratingData.rating} | Difficulty: ${ratingData.difficulty}`;
+    badge.textContent = `Rating: ${rating} | Difficulty: ${difficulty}`;
     badge.classList.add("rmp-badge");
     badge.style.marginLeft = "8px";
     badge.style.padding = "2px 6px";
@@ -41,19 +41,31 @@ function injectRating(link: HTMLAnchorElement, ratingData: RatingData): void {
 function extractAndDisplayInstructors(): void {
     const instructorCells = document.querySelectorAll<HTMLAnchorElement>("td[data-property='instructor'] a.email");
     instructorCells.forEach(link => {
-        const rawName = link.textContent.trim();
+
+        if (link.hasAttribute('data-rmp-processed')) {
+            return;
+        }
+
+        const rawName = link.textContent.trim() || "";
+        if (!rawName || rawName.includes('@')) {
+            return;
+        }
+        link.setAttribute('data-rmp-processed', 'true');
         const formattedName = formatName(rawName);
-        const [firstName, lastName] = formattedName.split(" ");
+        // const [firstName, lastName] = formattedName.split(" ");
         console.log("Instructor", formattedName);
 
-        const fakeData: RatingData = {
-            rating: "4.2",
-            difficulty: "3.6"
-        }
 
-        if (!link.nextSibling || !(link.nextSibling as HTMLElement).classList?.contains("rmp-badge")) {
-            injectRating(link, fakeData);
-        }
+        chrome.runtime.sendMessage(
+            { action: "getRating", professor: formattedName },
+            (response) => {
+                if (response && response.ratingData) {
+                    injectRating(link, response.ratingData.rating, response.ratingData.difficulty);
+                } else {
+                    injectRating(link, "N/A", "N/A");
+                }
+            }
+        )
     }
   );
 }
