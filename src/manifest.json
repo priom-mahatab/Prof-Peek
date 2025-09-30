@@ -20,6 +20,12 @@
   ],
   "icons": {
     "48": "icons/icon48.png"
+  },
+  "action": {
+    "default_title": "Prof Peek",
+    "default_icon": {
+        "48": "icons/icon48.png"
+    },
+    "default_popup": "popup.html"
   }
-
 }

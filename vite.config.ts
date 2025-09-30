@@ -21,6 +21,8 @@ export default defineConfig({
             name: "copy-assets",
             writeBundle() {
                 copyFileSync(resolve("src/manifest.json"), resolve("dist/manifest.json"));
+                copyFileSync(resolve("src/popup.html"), resolve("dist/popup.html")); 
+                copyFileSync(resolve("src/styles.css"), resolve("dist/styles.css"));   
                 cpSync(resolve("src/icons"), resolve("dist/icons"), { recursive: true})
             },
         },

@@ -7,7 +7,7 @@ function formatName(rawName: string): string {
         const last = parts[0].trim();
         const first = parts[1].trim();
 
-        if (first.split(" ").length === 2) {
+        if (first.split(" ").length >= 2) {
             const shortFirst = first.split(" ")[0].trim()
             return `${shortFirst} ${last}`;
         }
