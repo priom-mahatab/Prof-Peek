@@ -1,7 +1,7 @@
 console.log("RMP Extension loaded, St. Edward's University");
 
 // create function for formatting name
-function formatName(rawName) {
+function formatName(rawName: string): string {
     const parts = rawName.split(",");
     if (parts.length === 2) {
         const last = parts[0].trim();
@@ -17,8 +17,13 @@ function formatName(rawName) {
     return rawName.trim();
 }
 
+interface RatingData {
+    rating: string;
+    difficulty: string;
+}
+
 // function for injecting rating add a class and then add text and styling
-function injectRating(link, ratingData) {
+function injectRating(link: HTMLAnchorElement, ratingData: RatingData): void {
     const badge = document.createElement("span");
     badge.textContent = `Rating: ${ratingData.rating} | Difficulty: ${ratingData.difficulty}`;
     badge.classList.add("rmp-badge");
@@ -33,20 +38,20 @@ function injectRating(link, ratingData) {
 }
 
 // function for extracting info from course catalogue
-function extractAndDisplayInstructors() {
-    const instructorCells = document.querySelectorAll("td[data-property='instructor'] a.email");
+function extractAndDisplayInstructors(): void {
+    const instructorCells = document.querySelectorAll<HTMLAnchorElement>("td[data-property='instructor'] a.email");
     instructorCells.forEach(link => {
         const rawName = link.textContent.trim();
         const formattedName = formatName(rawName);
         const [firstName, lastName] = formattedName.split(" ");
         console.log("Instructor", formattedName);
 
-        const fakeData = {
+        const fakeData: RatingData = {
             rating: "4.2",
             difficulty: "3.6"
         }
 
-        if (!link.nextSibling || !link.nextSibling.classList?.contains("rmp-badge")) {
+        if (!link.nextSibling || !(link.nextSibling as HTMLElement).classList?.contains("rmp-badge")) {
             injectRating(link, fakeData);
         }
     }
