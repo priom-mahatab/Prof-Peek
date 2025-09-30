@@ -17,8 +17,8 @@ header {
 }
 
 .seu-logo {
-    width: 28px; /* Reduced size for better integration */
-    height: 28px;
+    width: 48px; /* Reduced size for better integration */
+    height: 48px;
     margin-right: 8px;
     object-fit: contain; /* Prevents the image from being stretched or distorted */
 }
@@ -46,7 +46,7 @@ body {
 }
 
 .description-text {
-    font-size: 8px;
+    font-size: px;
     color: #666;
     line-height: 1.4;
     margin: 0;

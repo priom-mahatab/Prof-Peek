@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "name": "Professor Peek",
+    "name": "Prof Peek SEU",
     "version": "1.0.0",
     "description": "Shows RateMyProfessors rating & difficulty for St. Edward’s instructors.",
     "permissions": ["scripting", "storage"],
@@ -19,12 +19,14 @@
     }
   ],
   "icons": {
-    "48": "icons/icon48.png"
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
   },
   "action": {
     "default_title": "Prof Peek",
     "default_icon": {
-        "48": "icons/icon48.png"
+        "128": "icons/icon128.png"
     },
     "default_popup": "popup.html"
   }
