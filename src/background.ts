@@ -6,6 +6,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === "getRating") {
         const professor = message.professor;
 
+        // check chrome.storage.local cache
         chrome.storage.local.get([professor], async (result) => {
             const cached = result[professor];
 
