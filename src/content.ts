@@ -60,8 +60,13 @@ function extractAndDisplayInstructors(): void {
             { action: "getRating", professor: formattedName },
             (response) => {
                 if (response && response.ratingData) {
+                    if (response.ratingData.rating === "0" && response.ratingData.difficulty === "0") {
+                        response.ratingData.rating = "N/A"
+                        response.ratingData.difficulty = "N/A"
+                    }
                     injectRating(link, response.ratingData.rating, response.ratingData.difficulty);
                 } else {
+                    console.warn("No data found for", formattedName);
                     injectRating(link, "N/A", "N/A");
                 }
             }
@@ -75,5 +80,3 @@ extractAndDisplayInstructors();
 // observer for looking for updates in the DOM
 const observer = new MutationObserver(() => extractAndDisplayInstructors());
 observer.observe(document.body, {childList: true, subtree: true});
-
-
