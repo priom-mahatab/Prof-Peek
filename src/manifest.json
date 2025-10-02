@@ -3,7 +3,7 @@
     "name": "Prof Peek SEU",
     "version": "1.0.0",
     "description": "Shows RateMyProfessors rating & difficulty for St. Edward’s instructors.",
-    "permissions": ["scripting", "storage"],
+    "permissions": ["storage"],
     "host_permissions": [
     "https://www.ratemyprofessors.com/*",
     "https://*.ratemyprofessors.com/*"
