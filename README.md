@@ -11,7 +11,8 @@ It helps students make more informed choices when registering for classes, witho
 ![Demo](images/sample.png)
 
 ## For Users
-Extension will be hyperlinked once it has been approved by Chrome.
+![Link to Chrome Web Store](https://chromewebstore.google.com/detail/gnkgbnaejgmdnkopodnfmcfodgbfahmd?utm_source=item-share-cb)
+- Download the extension from the link above.
 
 ## For Developers / Contributors
 1. **Clone the repository** or **Download the extension files** from this repository.
