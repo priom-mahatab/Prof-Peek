@@ -11,7 +11,7 @@ It helps students make more informed choices when registering for classes, witho
 ![Demo](images/sample.png)
 
 ## For Users
-![Link to Chrome Web Store](https://chromewebstore.google.com/detail/gnkgbnaejgmdnkopodnfmcfodgbfahmd?utm_source=item-share-cb)
+[Link to Chrome Web Store](https://chromewebstore.google.com/detail/gnkgbnaejgmdnkopodnfmcfodgbfahmd?utm_source=item-share-cb)
 - Download the extension from the link above.
 
 ## For Developers / Contributors
