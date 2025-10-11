@@ -24,7 +24,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                 const ratingData = {
                     rating: data?.avgRating?.toString() ?? "N/A",
                     difficulty: data?.avgDifficulty?.toString() ?? "N/A",
+                    numRatings: data?.numRatings?.toString() ?? "N/A",
+                    legacyID: data?.legacyId?.toString() ?? "N/A"
                 };
+
+                console.log("Fetched RMP data for", professor, data);
 
                 // save to cache
                 chrome.storage.local.set({
@@ -34,6 +38,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                     }
                 });
 
+                console.log("Cache hit value:", cached.value);
+
                 sendResponse({ ratingData });
 
             } catch (err) {
@@ -41,7 +47,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                 sendResponse({
                     ratingData: {
                         rating: "N/A",
-                        difficulty: "N/A"
+                        difficulty: "N/A",
+                        numRatings: "N/A",
+                        legacyID: "N/A"
                     },
                 })
             }

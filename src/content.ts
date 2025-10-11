@@ -20,19 +20,36 @@ function formatName(rawName: string): string {
 interface RatingData {
     rating: string;
     difficulty: string;
+    numRatings: string;
+    legacyId: string;
 }
 
 // function for injecting rating add a class and then add text and styling
-function injectRating(link: HTMLAnchorElement, rating: string, difficulty: string): void {
+function injectRating(link: HTMLAnchorElement, rating: string, difficulty: string, numRatings: string, legacyID: string): void {
+
+    const professorUrl = legacyID !== "N/A" 
+    ? `https://www.ratemyprofessors.com/professor/${legacyID}`
+    : null;
     const badge = document.createElement("span");
-    badge.textContent = `Rating: ${rating} | Difficulty: ${difficulty}`;
+    badge.style.display = "inline-block";
     badge.classList.add("rmp-badge");
-    badge.style.marginLeft = "8px";
+    badge.style.marginLeft = "12px";
     badge.style.padding = "2px 6px";
-    badge.style.background = "#f0f0f0";
+    // badge.style.background = "#f0f0f0";
     badge.style.borderRadius = "6px";
     badge.style.fontSize = "12px";
     badge.style.color = "#333";
+
+    badge.innerHTML = `
+        <div><strong>Rating:</strong> ${rating} | <strong>Difficulty:</strong> ${difficulty}</div>
+        <div><strong>Number of Ratings:</strong> ${numRatings}</div>
+        <a href=${professorUrl} target="_blank" style="
+            color: #0066cc;
+            text-decoration: none;
+            display: block;
+            margin-top: 4px;
+        ">View on RateMyProfessors</a>
+    `;
 
     link.insertAdjacentElement("afterend", badge);
 }
@@ -63,11 +80,13 @@ function extractAndDisplayInstructors(): void {
                     if (response.ratingData.rating === "0" && response.ratingData.difficulty === "0") {
                         response.ratingData.rating = "N/A"
                         response.ratingData.difficulty = "N/A"
+                        response.ratingData.numRatings = "N/A"
+                        response.ratingData.legacyID = "N/A"
                     }
-                    injectRating(link, response.ratingData.rating, response.ratingData.difficulty);
+                    injectRating(link, response.ratingData.rating, response.ratingData.difficulty, response.ratingData.numRatings, response.ratingData.legacyID);
                 } else {
                     console.warn("No data found for", formattedName);
-                    injectRating(link, "N/A", "N/A");
+                    injectRating(link, "N/A", "N/A", "N/A", "N/A");
                 }
             }
         )
